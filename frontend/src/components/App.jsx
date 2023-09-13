@@ -79,6 +79,7 @@ function App() {
   function handleTokenCheck() {
     if (localStorage.getItem('token')) {
       const thisToken = localStorage.getItem('token');
+      console.log('handleTokenCheck: ', thisToken);
       setToken(thisToken);
       getContent(token)
         .then((data) => {
@@ -188,8 +189,9 @@ function App() {
   }
 
   React.useEffect(() => {
+    console.log('start')
     handleTokenCheck();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   // проверить жетон
 

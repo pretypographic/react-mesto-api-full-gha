@@ -35,6 +35,7 @@ function authorize({ email, password }) {
 };
 
 function getContent(token) {
+    console.log('getContent: ', token);
     return fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         headers: {
