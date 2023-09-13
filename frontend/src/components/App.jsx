@@ -81,7 +81,7 @@ function App() {
       const thisToken = localStorage.getItem('token');
       console.log('handleTokenCheck: ', thisToken);
       setToken(thisToken);
-      getContent(token)
+      getContent(thisToken)
         .then((data) => {
           if (data) {
             setEmail(data.data.email);
@@ -190,7 +190,7 @@ function App() {
 
   React.useEffect(() => {
     console.log('start')
-    handleTokenCheck();
+    handleTokenCheck(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   // проверить жетон
