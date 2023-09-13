@@ -4,7 +4,9 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const path = require('path');
 const { errors } = require('celebrate');
+const { cors } = require('cors');
 require('dotenv').config();
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -13,6 +15,7 @@ const errorHandler = require('./middlewares/error-handler');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 const app = express();
+app.use(cors());
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -24,6 +27,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.use(requestLogger);
+app.use(express.static(path.join(__dirname, 'ryabova-react', 'build')));
 app.use(router);
 app.use(errorLogger);
 app.use(errors());

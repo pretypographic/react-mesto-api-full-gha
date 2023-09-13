@@ -6,7 +6,7 @@ class Api {
     }
 
     _getJSON(res) {
-        if(res.ok) {
+        if (res.ok) {
             return res.json();
         }
 
@@ -15,7 +15,7 @@ class Api {
 
     getProfileInfo() {
         return fetch(`${this.baseUrl}/users/me`, { headers: this.headers })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     patchProfileInfo(profile) {
@@ -27,7 +27,7 @@ class Api {
                 about: `${profile.about}`
             })
         })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     patchProfileAvatar(link) {
@@ -38,14 +38,14 @@ class Api {
                 avatar: link
             })
         })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     getInitialCards() {
         return fetch(`${this.baseUrl}/cards`, {
             headers: this.headers
         })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     postNewCard(card) {
@@ -57,7 +57,7 @@ class Api {
                 link: `${card.link}`
             })
         })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     deleteCard(_id) {
@@ -65,7 +65,7 @@ class Api {
             method: 'DELETE',
             headers: this.headers
         })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     putLike(_id) {
@@ -73,7 +73,7 @@ class Api {
             method: 'PUT',
             headers: this.headers
         })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     deleteLike(_id) {
@@ -81,7 +81,7 @@ class Api {
             method: 'DELETE',
             headers: this.headers
         })
-        .then(this._getJSON);
+            .then(this._getJSON);
     }
 
     errorMessege(err) {
@@ -91,14 +91,14 @@ class Api {
 }
 
 const api = new Api({
-baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-61',
-headers: {
-    authorization: '534c8dff-99cf-47b7-8e1b-d4071b0c71b2',
-    'Content-Type': 'application/json'
-},
-handleError: (err) => {
-    console.log(err);
-}
+    baseUrl: 'http://158.160.109.158:3000',
+    headers: {
+        authorization: '534c8dff-99cf-47b7-8e1b-d4071b0c71b2',
+        'Content-Type': 'application/json'
+    },
+    handleError: (err) => {
+        console.log(err);
+    }
 });
 
 export { api }

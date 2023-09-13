@@ -1,14 +1,14 @@
 # Node.js dependencies
-/backend/node_modules
-/frontend/node_modules
+frontend/node_modules
+backend/node_modules
 /.pnp
 .pnp.js
 
 # Test coverage
-/frontend/coverage
+frontend/coverage
 
 # Build output
-/frontend/build
+frontend/build
 
 # Miscellaneous
 .DS_Store

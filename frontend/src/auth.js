@@ -1,4 +1,4 @@
-const baseUrl = 'https://auth.nomoreparties.co';
+const baseUrl = 'http://158.160.109.158:3000';
 
 function register({ email, password }) {
     return fetch(`${baseUrl}/signup`, {
