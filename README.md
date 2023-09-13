@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.109.158
 
-Frontend https://...
+Frontend https://wecto.nomoredomainsicu.ru
 
-Backend https://...
+Backend https://api.wecto.nomoredomainsicu.ru

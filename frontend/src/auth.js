@@ -1,4 +1,4 @@
-const baseUrl = 'api.wecto.nomoredomainsicu.ru';
+const baseUrl = 'http://api.wecto.nomoredomainsicu.ru';
 
 function register({ email, password }) {
     return fetch(`${baseUrl}/signup`, {
