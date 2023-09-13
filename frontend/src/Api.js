@@ -91,7 +91,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'http://158.160.109.158:3000',
+    baseUrl: 'api.wecto.nomoredomainsicu.ru',
     headers: {
         authorization: '534c8dff-99cf-47b7-8e1b-d4071b0c71b2',
         'Content-Type': 'application/json'
