@@ -1,0 +1,16 @@
+.markup {
+    max-width: 880px;
+    margin: 0 19px 0;
+}
+
+@media screen and (max-width: 920px) {
+    .markup {
+        max-width: 581px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .markup {
+        max-width: 282px;
+    }
+}

@@ -1,0 +1,38 @@
+.header__support_type_mobile {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .header__support_type_mobile {
+        display: flex;
+        width: 100%;
+        padding: 40px 0;
+        border-bottom: 1px solid #545454;
+        flex-direction: column;
+        align-items: center;
+        animation: down 0.6s;
+    }
+}
+
+.header__support_type_mobile .header__text {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+}
+
+.header__support_type_mobile .header__link {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+}
+
+@keyframes down {
+    0% {
+        opacity: 0;
+        transform: translateY(-120px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,14 @@
+.conductor__link {
+    text-decoration: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: white;
+    transform: opacity 0.3s;
+}
+
+.conductor__link:hover {
+    opacity: 0.6;
+}

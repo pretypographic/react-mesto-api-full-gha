@@ -1,0 +1,6 @@
+.header__button_pressed {
+    width: 20px;
+    height: 20px;
+    background: url(../../../../images/__close__button.svg);
+    background-size: contain;
+}
