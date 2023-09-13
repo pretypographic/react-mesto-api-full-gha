@@ -70,6 +70,7 @@ function App() {
           setToken(data.token);
           handleTokenCheck();
         }
+        navigate('/', { replace: true });
         resetChange();
       })
       .catch((err) => console.log(err));
