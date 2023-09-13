@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const path = require('path');
 const { errors } = require('celebrate');
-const { cors } = require('cors');
+const cors = require('cors');
 require('dotenv').config();
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
