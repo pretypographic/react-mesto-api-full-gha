@@ -13,7 +13,7 @@ import {
   putLike,
   deleteLike,
   errorMessege,
-} from '../api';
+} from '../front-api';
 import { authorize, register, getContent } from '../auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 // операции
