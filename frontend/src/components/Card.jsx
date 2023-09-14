@@ -1,20 +1,21 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card({ card, onCardClick, onCardLike, onDelete }) {
     const currentUser = useContext(CurrentUserContext);
     const isOwn = card.owner._id === currentUser._id;
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    const cardLikeButtonClassName = ( 
-    `element__reaction-button ${isLiked && 'element__reaction-button_active'}` 
+    const [isLiked, setIsLiked] = useState(card.likes.some(i => i._id === currentUser._id));
+    const cardLikeButtonClassName = (
+        `element__reaction-button ${isLiked && 'element__reaction-button_active'}`
     );
 
     function handleClick() {
         onCardClick({ link: card.link, name: card.name });
     }
 
-    function handleLikeClick () {
+    function handleLikeClick() {
         onCardLike({ _id: card._id, isLiked });
+        setIsLiked(!isLiked);
     }
 
     function handleDeleteClick() {
@@ -34,11 +35,11 @@ function Card({ card, onCardClick, onCardLike, onDelete }) {
                 <button
                     className={cardLikeButtonClassName}
                     aria-label="Одобрить."
-                    onMouseDown={handleLikeClick}
+                    onClick={handleLikeClick}
                 >
                     {card.likes.length}</button>
             </div>
-            {isOwn && <button 
+            {isOwn && <button
                 className='element__trash-button'
                 aria-label="Удалить."
                 onClick={handleDeleteClick}
