@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.109.158
+IP 158.160.109.158
 
 Frontend https://wecto.nomoredomainsicu.ru
 
