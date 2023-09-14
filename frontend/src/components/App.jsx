@@ -3,7 +3,17 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 // реакт
 import '../index.css';
 // стили
-import { api } from "../Api";
+import {
+  getProfileInfo,
+  patchProfileInfo,
+  patchProfileAvatar,
+  getInitialCards,
+  postNewCard,
+  deleteCard,
+  putLike,
+  deleteLike,
+  errorMessege,
+} from '../api';
 import { authorize, register, getContent } from '../auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 // операции
@@ -112,12 +122,12 @@ function App() {
     setEditProfilePopupOpen(true);
   };
   function handleUpdateProfile(profile) {
-    api.patchProfileInfo(profile)
+    patchProfileInfo(token, profile)
       .then((updatedProfile) => {
         setCurrentUserProfile(updatedProfile);
         closeAllPopups();
       })
-      .catch(api.errorMessege);
+      .catch(errorMessege);
   };
   // редактирование профиля
 
@@ -125,12 +135,12 @@ function App() {
     setEditAvatarPopupOpen(true);
   };
   function handleUpdateAvatar({ link }) {
-    api.patchProfileAvatar(link)
+    patchProfileAvatar(token, link)
       .then((updatedProfile) => {
         setCurrentUserProfile(updatedProfile);
         closeAllPopups();
       })
-      .catch(api.errorMessege);
+      .catch(errorMessege);
   };
   // редактирование аватара
 
@@ -138,12 +148,12 @@ function App() {
     setAddLocationPopupOpen(true);
   };
   function handleAddLocation(card) {
-    api.postNewCard(card)
+    postNewCard(token, card)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch(api.errorMessege);
+      .catch(errorMessege);
   };
   // добавление карточки
 
@@ -163,25 +173,25 @@ function App() {
 
   function handleCardLike(card) {
     if (!card.isLiked) {
-      api.putLike(card._id)
+      putLike(token, card._id)
         .then((newCard) => {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
         })
-        .catch(api.errorMessege);
+        .catch(errorMessege);
     } else {
-      api.deleteLike(card._id)
+      deleteLike(token, card._id)
         .then((newCard) => {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
         })
-        .catch(api.errorMessege);
+        .catch(errorMessege);
     }
   };
   function handleDelete(card) {
-    api.deleteCard(card._id)
+    deleteCard(token, card._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
-      .catch(api.errorMessege);
+      .catch(errorMessege);
   };
   // возможности карточки
 
@@ -197,12 +207,13 @@ function App() {
   // проверить жетон
 
   React.useEffect(() => {
-    Promise.all([api.getProfileInfo(), api.getInitialCards()])
+    Promise.all([getProfileInfo(token), getInitialCards(token)])
       .then(([profile, cards]) => {
         setCurrentUserProfile(profile);
         setCards(cards);
       })
-      .catch(api.errorMessege);
+      .catch(errorMessege);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   // загрузить пользовательские данные
 

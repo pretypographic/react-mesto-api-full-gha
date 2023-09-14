@@ -1,104 +1,131 @@
-class Api {
-    constructor({ baseUrl, headers, handleError }) {
-        this.baseUrl = baseUrl;
-        this.headers = headers;
-        this._handleError = handleError;
+const baseUrl = 'https://api.wecto.nomoredomainsicu.ru';
+
+function sendRequest(endpoint, method, headers, body) {
+    const options = {
+        method,
+        headers,
+    };
+
+    if (body) {
+        options.body = JSON.stringify(body);
     }
 
-    _getJSON(res) {
-        if (res.ok) {
-            return res.json();
-        }
-
-        return Promise.reject(`Error: ${res.status} - ${res.statusText}`);
-    }
-
-    getProfileInfo() {
-        return fetch(`${this.baseUrl}/users/me`, { headers: this.headers })
-            .then(this._getJSON);
-    }
-
-    patchProfileInfo(profile) {
-        return fetch(`${this.baseUrl}/users/me`, {
-            method: 'PATCH',
-            headers: this.headers,
-            body: JSON.stringify({
-                name: `${profile.name}`,
-                about: `${profile.about}`
-            })
-        })
-            .then(this._getJSON);
-    }
-
-    patchProfileAvatar(link) {
-        return fetch(`${this.baseUrl}/users/me/avatar`, {
-            method: 'PATCH',
-            headers: this.headers,
-            body: JSON.stringify({
-                avatar: link
-            })
-        })
-            .then(this._getJSON);
-    }
-
-    getInitialCards() {
-        return fetch(`${this.baseUrl}/cards`, {
-            headers: this.headers
-        })
-            .then(this._getJSON);
-    }
-
-    postNewCard(card) {
-        return fetch(`${this.baseUrl}/cards`, {
-            method: 'POST',
-            headers: this.headers,
-            body: JSON.stringify({
-                name: `${card.name}`,
-                link: `${card.link}`
-            })
-        })
-            .then(this._getJSON);
-    }
-
-    deleteCard(_id) {
-        return fetch(`${this.baseUrl}/cards/${_id}`, {
-            method: 'DELETE',
-            headers: this.headers
-        })
-            .then(this._getJSON);
-    }
-
-    putLike(_id) {
-        return fetch(`${this.baseUrl}/cards/${_id}/likes`, {
-            method: 'PUT',
-            headers: this.headers
-        })
-            .then(this._getJSON);
-    }
-
-    deleteLike(_id) {
-        return fetch(`${this.baseUrl}/cards/${_id}/likes`, {
-            method: 'DELETE',
-            headers: this.headers
-        })
-            .then(this._getJSON);
-    }
-
-    errorMessege(err) {
-        console.log(err);
-        // this._handleError(err);
-    }
+    return fetch(`${baseUrl}${endpoint}`, options)
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(`Error: ${res.status} - ${res.statusText}.`);
+        });
 }
 
-const api = new Api({
-    baseUrl: 'https://api.wecto.nomoredomainsicu.ru',
-    headers: {
-        authorization: '534c8dff-99cf-47b7-8e1b-d4071b0c71b2',
-        'Content-Type': 'application/json'
-    },
-    handleError: (err) => {
-        console.log(err);
-    }
-});
+function getProfileInfo(token) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
 
-export { api }
+    return sendRequest('/users/me', 'GET', headers);
+}
+
+function patchProfileInfo(token, profile) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    const body = {
+        name: `${profile.name}`,
+        about: `${profile.about}`
+    };
+
+    return sendRequest('/users/me', 'PATCH', headers, body);
+}
+
+function patchProfileAvatar(token, link) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    const body = {
+        avatar: link
+    };
+
+    return sendRequest('/users/me/avatar', 'PATCH', headers, body);
+}
+
+function getInitialCards(token) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return sendRequest('/cards', 'GET', headers);
+}
+
+function postNewCard(token, card) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    const body = {
+        name: `${card.name}`,
+        link: `${card.link}`
+    };
+
+    return sendRequest('/cards', 'POST', headers, body);
+}
+
+function deleteCard(token, _id) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return sendRequest(`/cards/${_id}`, 'DELETE', headers);
+}
+
+function putLike(token, _id) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return sendRequest(`/cards/${_id}/likes`, 'PUT', headers);
+}
+
+function deleteLike(token, _id) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
+
+    return sendRequest(`/cards/${_id}/likes`, 'DELETE', headers);
+}
+
+function errorMessege(err) {
+    console.log(err);
+    // this._handleError(err);
+}
+
+export {
+    getProfileInfo,
+    patchProfileInfo,
+    patchProfileAvatar,
+    getInitialCards,
+    postNewCard,
+    deleteCard,
+    putLike,
+    deleteLike,
+    errorMessege,
+}
