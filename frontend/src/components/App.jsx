@@ -214,7 +214,7 @@ function App() {
       })
       .catch(errorMessege);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [loggedIn])
   // загрузить пользовательские данные
 
   if (isLoading) {
