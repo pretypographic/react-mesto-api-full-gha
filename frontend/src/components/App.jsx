@@ -90,7 +90,6 @@ function App() {
   function handleTokenCheck() {
     if (localStorage.getItem('token')) {
       const thisToken = localStorage.getItem('token');
-      console.log('handleTokenCheck: ', thisToken);
       setToken(thisToken);
       getContent(thisToken)
         .then((data) => {
@@ -200,7 +199,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    console.log('start')
     handleTokenCheck(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

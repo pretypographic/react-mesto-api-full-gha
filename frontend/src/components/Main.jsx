@@ -40,11 +40,11 @@ function Main({ cards, onEditProfile, onAddLocation, onEditAvatar, onCardClick, 
             <section className="elements">
                 {cards.map((card, i) => (
                     <Card
-                        key={card._id}
                         card={card}
                         onCardClick={onCardClick}
                         onCardLike={onCardLike}
                         onDelete={onDelete}
+                        key={card._id}
                     />
                 ))}
                 {/* элемент альбома */}

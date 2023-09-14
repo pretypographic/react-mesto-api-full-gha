@@ -35,7 +35,6 @@ function authorize({ email, password }) {
 };
 
 function getContent(token) {
-    console.log('getContent(1): ', token);
     return fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         headers: {
@@ -45,7 +44,6 @@ function getContent(token) {
         }
     })
         .then((res) => {
-            console.log('getContent(2): ', res.ok);
             if (res.ok) {
                 return res.json();
             };
