@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const jwt = require('jsonwebtoken');
 
-// const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 const AccessDeniedError = require('../errors/access-denied-err');
 
 module.exports = (req, res, next) => {
@@ -14,8 +14,7 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(
       token,
-      // NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-      'd559150dfc0bb65b20fcbd5c798b288a679187ab2d26ee7681c479615e52d44b',
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
     );
   } catch {
     return next(new AccessDeniedError('authorization required'));

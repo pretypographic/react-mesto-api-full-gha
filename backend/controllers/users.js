@@ -7,7 +7,7 @@ const BadRequestError = require('../errors/bad-request-err');
 const NotFoundError = require('../errors/not-found-err');
 const Conflict = require('../errors/conflict');
 
-// const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const OK = 200;
 const CREATED = 201;
@@ -75,8 +75,7 @@ const loginUser = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        // NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        'd559150dfc0bb65b20fcbd5c798b288a679187ab2d26ee7681c479615e52d44b',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
       );
       res
         .status(OK)
